@@ -41,7 +41,11 @@ export class MapService {
       this.map.addLayer({
         id: 'treasures',
         source: 'treasures',
-        type: 'circle'
+        type: 'circle',
+        paint: {
+          "circle-color": 'red',
+          "circle-radius": 10
+        }
       });
 
     })
