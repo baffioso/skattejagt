@@ -1,17 +1,87 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { filter, first, map, shareReplay, tap } from 'rxjs/operators';
 import { Feature } from 'geojson';
+import distance from '@turf/distance';
+import {Point} from 'geojson'
+
 import { treasures } from 'src/assets/treasures';
+import { LocalStorageService } from './local-storage.service';
+import { GeolocationService } from './geolocation.service';
+import { MapService } from './map.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StoreService {
 
-  private _treasures$ = new BehaviorSubject<Feature[]>(treasures.features);
-  treasures$: Observable<Feature[]> = this._treasures$.asObservable();
+  private shuffledTreasures: Feature<Point>[] = treasures.features
+    .map(feature => ({ feature, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ feature }) => feature)
 
-  nextTreasure = this.treasures$
+  private _treasures$ = new BehaviorSubject<Feature<Point>[]>(this.shuffledTreasures)
+  treasures$: Observable<Feature<Point>[]> = this._treasures$.asObservable();
 
-  constructor() { }
+  private _treasureIndex$ = new BehaviorSubject<number>(0);
+  treasureIndex$: Observable<number> = this._treasureIndex$.asObservable();
+
+  private _showTreasure$ = new BehaviorSubject<boolean>(false);
+  showTreasure$: Observable<boolean> = this._showTreasure$.asObservable();
+
+  currentTreasure$ = combineLatest([
+    this.treasures$,
+    this.treasureIndex$,
+    this.mapService.mapLoaded$
+  ]).pipe(
+    filter(([,, mapLoaded]) => mapLoaded),
+    map(([treasues, index, ]) => treasues[index]),
+    tap(treasure => this.mapService.addMarker(treasure.geometry.coordinates))
+  )
+
+  distanceToTreasure$: Observable<number> = combineLatest([
+    this.geolocationService.position$,
+    this.currentTreasure$
+  ]).pipe(
+    map(([location, treasure]) => {
+
+      const userLocation = [location.coords.longitude, location.coords.latitude]
+
+      return Math.round(distance(userLocation, treasure.geometry.coordinates) * 1000)
+    }),
+    tap(distance => {
+      if (distance < 20) {
+        this._showTreasure$.next(true)
+      }
+    }),
+    shareReplay()
+  )
+
+  constructor(
+    private localStorageService: LocalStorageService,
+    private geolocationService: GeolocationService,
+    private mapService: MapService
+
+  ) {
+    this.localStorageService.add('treasures', this._treasures$.value)
+  }
+
+  nextTreasure(): void {
+    this._treasureIndex$.next(this._treasureIndex$.value + 1)
+    this._showTreasure$.next(false);
+
+    combineLatest([
+      this.geolocationService.position$,
+      this.currentTreasure$
+    ]).pipe(
+      first(),
+      tap(([position, treasure]) => {
+
+        const userLocation = [position.coords.longitude, position.coords.latitude]
+
+        this.mapService.zoomTo(userLocation, treasure.geometry.coordinates)
+      })
+    ).subscribe()
+  }
+
 }

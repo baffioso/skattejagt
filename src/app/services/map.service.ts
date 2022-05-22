@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Map, GeolocateControl } from 'maplibre-gl';
-import { treasures } from 'src/assets/treasures';
+import { Map, GeolocateControl, Marker, LngLatLike, LngLatBoundsLike } from 'maplibre-gl';
+import { BehaviorSubject, Observable } from 'rxjs';
+import bbox from '@turf/bbox';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,10 @@ import { treasures } from 'src/assets/treasures';
 export class MapService {
 
   map: Map;
+  marker: Marker;
+
+  private _mapLoaded$ = new BehaviorSubject<boolean>(false);
+  mapLoaded$: Observable<boolean> = this._mapLoaded$.asObservable();
 
   constructor() { }
 
@@ -16,7 +21,8 @@ export class MapService {
       container: 'map',
       style: 'https://api.maptiler.com/maps/hybrid/style.json?key=tiNMCb9CgsMttr9UGj47',
       center: [12.5745, 55.6648],
-      zoom: 15
+      zoom: 15,
+      attributionControl: false
     })
 
     this.map.addControl(
@@ -25,29 +31,40 @@ export class MapService {
           enableHighAccuracy: true
         },
         trackUserLocation: true
-      })
+      }),
+      'bottom-right'
     );
 
     this.map.on('load', () => {
 
-      this.map.addSource(
-        'treasures',
-        {
-          type: 'geojson',
-          data: treasures
-        }
-      );
-
-      this.map.addLayer({
-        id: 'treasures',
-        source: 'treasures',
-        type: 'circle',
-        paint: {
-          "circle-color": 'red',
-          "circle-radius": 10
-        }
-      });
+      this._mapLoaded$.next(true);
 
     })
+  }
+
+  addMarker(coords: number[]): void {
+
+    const el = document.createElement('div');
+    el.className = 'treasure-map-icon';
+
+    if (this.marker) {
+      this.removeMarker();
+    }
+
+    this.marker = new Marker()
+      .setLngLat(coords as LngLatLike)
+      .addTo(this.map);
+  }
+
+  removeMarker(): void {
+    this.marker.remove();
+  }
+
+  zoomTo(position: number[], treasure: number[]) {
+    const bounds = bbox({
+      type: 'LineString',
+      coordinates: [position, treasure]
+    });
+    this.map.fitBounds(bounds as LngLatBoundsLike, { padding: 100 })
   }
 }

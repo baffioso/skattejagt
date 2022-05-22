@@ -1,6 +1,6 @@
-import { FeatureCollection } from 'geojson'
+import { FeatureCollection, Point } from 'geojson'
 
-export const treasures: FeatureCollection = {
+export const treasures: FeatureCollection<Point> = {
   "type": "FeatureCollection",
   "features": [
     {

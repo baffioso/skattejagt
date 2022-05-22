@@ -1,5 +1,20 @@
 #map {
   height: 100%;
   width: 100%;
-  background-color: aqua;
+
+  .distance {
+    position: absolute;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.531);
+    height: 56px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    span {
+      font-size: x-large;
+      color: white;
+    }
+  }
 }

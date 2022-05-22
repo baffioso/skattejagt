@@ -1,14 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~maplibre-gl/dist/maplibre-gl.css";
-
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
 
 * {
   box-sizing: border-box;
+  font-family: 'Satisfy', cursive;
 }
 
 html, body {
   height: 100%;
   width: 100%;
   margin: 0;
+}
+
+.treasure-map-icon {
+  display: block;
+  border: none;
+  padding: 0;
+  background-image: url('assets/treasure.png');
+  width: 28px;
+  height: 40px;
+}
+
+.mapboxgl-ctrl-group button, .maplibregl-ctrl-group button {
+  height: 45px;
+  width: 45px;
 }
 
