@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-// import confetti from 'canvas-confetti';
+import confetti from 'canvas-confetti';
 import { StoreService } from 'src/app/services/store.service';
 
 @Component({
@@ -25,7 +25,7 @@ export class TreasureComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-      // confetti();
+    confetti();
   }
 
   onNextTreasure(): void {

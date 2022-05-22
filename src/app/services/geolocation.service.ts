@@ -11,11 +11,15 @@ export class GeolocationService {
     let watchId: number;
 
     if ('geolocation' in navigator) {
-      watchId = navigator.geolocation.watchPosition((position: GeolocationPosition) => {
-        observer.next(position);
-      }, (error: GeolocationPositionError) => {
-        observer.error(error);
-      });
+      watchId = navigator.geolocation.watchPosition(
+        (position: GeolocationPosition) => observer.next(position),
+        (error: GeolocationPositionError) => observer.error(error),
+        {
+          enableHighAccuracy: true,
+          maximumAge: 2000
+        }
+      );
+      console.log('LOCATION')
     } else {
       observer.error('Geolocation not available');
     }
