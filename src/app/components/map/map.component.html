@@ -4,7 +4,7 @@
     <span>
       Afstand: {{ store.distanceToTreasure$ | async }} m
     </span>
-    <h2>{{(store.treasureIndex$ | async)}} / {{(store.treasures$ | async)?.length}}</h2>
+    <h2 (click)="store.nextTreasure()">{{(store.treasureIndex$ | async)}} / {{(store.treasures$ | async)?.length}}</h2>
   </div>
 </div>
 
