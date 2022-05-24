@@ -22,8 +22,7 @@ export class MapService {
       style: 'https://api.maptiler.com/maps/6f058849-8a79-455e-ae2f-817a7ec72312/style.json?key=tiNMCb9CgsMttr9UGj47',
       center: [12.5745, 55.6648],
       zoom: 15,
-      attributionControl: false,
-      hash: true
+      attributionControl: false
     })
 
     this.map.addControl(
