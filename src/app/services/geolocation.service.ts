@@ -19,7 +19,7 @@ export class GeolocationService {
           maximumAge: 2000
         }
       );
-      console.log('LOCATION')
+
     } else {
       observer.error('Geolocation not available');
     }

@@ -37,6 +37,7 @@ export class MapService {
 
     this.map.on('load', () => {
 
+      this.map.resize()
       this._mapLoaded$.next(true);
 
     })

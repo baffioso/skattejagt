@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +15,8 @@ export class LocalStorageService {
     localStorage.setItem(key, JSON.stringify(value));
   }
 
-  get(key: string): any {
-    localStorage.getItem(key)
+  get(key: string): Observable<string | null> {
+    return of(localStorage.getItem(key))
   }
 
 

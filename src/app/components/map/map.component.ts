@@ -14,7 +14,6 @@ import { Feature, Point } from 'geojson'
 })
 export class MapComponent implements OnInit, AfterViewInit {
 
-  // currentTreasure$: Observable<Feature<Point>>
   distanceToTreasure$: Observable<number>;
 
   constructor(
@@ -23,23 +22,12 @@ export class MapComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
-    // this.currentPosistion$ = this.geolocationService.position$.pipe(
-    //   map(position => position.coords)
-    // )
-
     this.distanceToTreasure$ = this.store.distanceToTreasure$
-
+    this.store.showSummery$.subscribe(console.log)
   }
 
   ngAfterViewInit(): void {
     this.mapService.initMap();
-
-    // this.store.treasureIndex$.subscribe(console.log);
-    // this.geolocationService.watchPosistion();
-    // this.pos = this.geolocationService.position$.pipe(
-    //   map((position: any) => position.coords),
-    //   tap(console.log)
-    // ).subscribe()
   }
 
 

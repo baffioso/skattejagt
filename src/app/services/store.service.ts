@@ -3,7 +3,7 @@ import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { filter, first, map, shareReplay, tap } from 'rxjs/operators';
 import { Feature } from 'geojson';
 import distance from '@turf/distance';
-import {Point} from 'geojson'
+import { Point } from 'geojson'
 
 import { treasures } from 'src/assets/treasures';
 import { LocalStorageService } from './local-storage.service';
@@ -19,6 +19,7 @@ export class StoreService {
     .map(feature => ({ feature, sort: Math.random() }))
     .sort((a, b) => a.sort - b.sort)
     .map(({ feature }) => feature)
+    .slice(0, 2)
 
   private _treasures$ = new BehaviorSubject<Feature<Point>[]>(this.shuffledTreasures)
   treasures$: Observable<Feature<Point>[]> = this._treasures$.asObservable();
@@ -34,8 +35,8 @@ export class StoreService {
     this.treasureIndex$,
     this.mapService.mapLoaded$
   ]).pipe(
-    filter(([,, mapLoaded]) => mapLoaded),
-    map(([treasues, index, ]) => treasues[index]),
+    filter(([, , mapLoaded]) => mapLoaded),
+    map(([treasues, index,]) => treasues[index]),
     tap(treasure => this.mapService.addMarker(treasure.geometry.coordinates))
   )
 
@@ -50,11 +51,18 @@ export class StoreService {
       return Math.round(distance(userLocation, treasure.geometry.coordinates) * 1000)
     }),
     tap(distance => {
-      if (distance < 20) {
+      if (distance < 20000) {
         this._showTreasure$.next(true)
       }
     }),
     shareReplay()
+  )
+
+  showSummery$: Observable<boolean> = combineLatest([
+    this.treasures$,
+    this.treasureIndex$
+  ]).pipe(
+    map(([treasures, index]) => treasures.length - 1 === index)
   )
 
   constructor(
@@ -67,7 +75,10 @@ export class StoreService {
   }
 
   nextTreasure(): void {
-    this._treasureIndex$.next(this._treasureIndex$.value + 1)
+    if (this._treasureIndex$.value + 1 < this._treasures$.value.length) {
+      this._treasureIndex$.next(this._treasureIndex$.value + 1)
+    }
+
     this._showTreasure$.next(false);
 
     combineLatest([
