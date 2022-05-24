@@ -31,12 +31,12 @@ export class StoreService {
 
   private _treasureIndex$ = new BehaviorSubject<number>(0);
   treasureIndex$: Observable<number> = this._treasureIndex$.asObservable()
-    .pipe(
-      switchMap(() => this.localStorageService.get('treasureIndex')),
-      filter((index: any) => !!index),
-      map((index: number) => index),
-      tap(console.log)
-    );
+    // .pipe(
+    //   switchMap(() => this.localStorageService.get('treasureIndex')),
+    //   filter((index: any) => !!index),
+    //   map((index: number) => index),
+    //   tap(console.log)
+    // );
 
   private _showTreasure$ = new BehaviorSubject<boolean>(false);
   showTreasure$: Observable<boolean> = this._showTreasure$.asObservable();
