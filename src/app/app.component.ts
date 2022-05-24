@@ -9,7 +9,7 @@ import { StoreService } from './services/store.service';
 export class AppComponent {
   treasureVisible = false;
 
-  constructor (
+  constructor(
     public store: StoreService
-  ) {}
+  ) { }
 }

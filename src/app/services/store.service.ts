@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { filter, first, map, shareReplay, tap } from 'rxjs/operators';
+import { filter, first, map, shareReplay, tap, switchMap, mergeMap } from 'rxjs/operators';
 import { Feature } from 'geojson';
 import distance from '@turf/distance';
 import { Point } from 'geojson'
@@ -19,13 +19,24 @@ export class StoreService {
     .map(feature => ({ feature, sort: Math.random() }))
     .sort((a, b) => a.sort - b.sort)
     .map(({ feature }) => feature)
-    //.slice(0, 2)
+  //.slice(0, 2)
 
   private _treasures$ = new BehaviorSubject<Feature<Point>[]>(this.shuffledTreasures)
-  treasures$: Observable<Feature<Point>[]> = this._treasures$.asObservable();
+  treasures$: Observable<Feature<Point>[]> = this._treasures$.asObservable()
+    .pipe(
+      switchMap(() => this.localStorageService.get('treasures')),
+      filter((treasures: any) => !!treasures),
+      map((treasures: Feature<Point>[]) => treasures)
+    );
 
   private _treasureIndex$ = new BehaviorSubject<number>(0);
-  treasureIndex$: Observable<number> = this._treasureIndex$.asObservable();
+  treasureIndex$: Observable<number> = this._treasureIndex$.asObservable()
+    .pipe(
+      switchMap(() => this.localStorageService.get('treasureIndex')),
+      filter((index: any) => !!index),
+      map((index: number) => index),
+      tap(console.log)
+    );
 
   private _showTreasure$ = new BehaviorSubject<boolean>(false);
   showTreasure$: Observable<boolean> = this._showTreasure$.asObservable();
@@ -51,11 +62,10 @@ export class StoreService {
       return Math.round(distance(userLocation, treasure.geometry.coordinates) * 1000)
     }),
     tap(distance => {
-      if (distance < 2000) {
+      if (distance < 20) {
         this._showTreasure$.next(true)
       }
-    }),
-    shareReplay()
+    })
   )
 
   showSummery$: Observable<boolean> = combineLatest([
