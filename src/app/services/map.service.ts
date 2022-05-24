@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Map, GeolocateControl, Marker, LngLatLike, LngLatBoundsLike } from 'maplibre-gl';
+import { Map, GeolocateControl, ScaleControl, Marker, LngLatLike, LngLatBoundsLike } from 'maplibre-gl';
 import { BehaviorSubject, Observable } from 'rxjs';
 import bbox from '@turf/bbox';
 
@@ -19,10 +19,12 @@ export class MapService {
   initMap(): void {
     this.map = new Map({
       container: 'map',
-      style: 'https://api.maptiler.com/maps/hybrid/style.json?key=tiNMCb9CgsMttr9UGj47',
+      style: 'https://api.maptiler.com/maps/6f058849-8a79-455e-ae2f-817a7ec72312/style.json?key=tiNMCb9CgsMttr9UGj47',
+      // style: 'https://api.maptiler.com/maps/hybrid/style.json?key=tiNMCb9CgsMttr9UGj47',
       center: [12.5745, 55.6648],
       zoom: 15,
-      attributionControl: false
+      attributionControl: false,
+      hash: true
     })
 
     this.map.addControl(
@@ -35,12 +37,52 @@ export class MapService {
       'bottom-right'
     );
 
+    const scale = new ScaleControl({
+      maxWidth: 200,
+      unit: 'metric'
+    });
+
+    this.map.addControl(scale);
+
     this.map.on('load', () => {
 
       this.map.resize()
       this._mapLoaded$.next(true);
 
-    })
+      this.map.addSource('orto', {
+        "type": "raster",
+        "tiles": [
+          "https://services.datafordeler.dk/GeoDanmarkOrto/orto_foraar/1.0.0/WMS?username=DTMMBNXGMB&password=LvA$*001&VERSION=1.1.1&REQUEST=GetMap&BBOX={bbox-epsg-3857}&SRS=EPSG:3857&WIDTH=256&HEIGHT=256&LAYERS=orto_foraar&STYLES=&FORMAT=image/jpeg"
+        ],
+        "tileSize": 256
+      });
+
+      this.map.addLayer({
+        "id": "orto",
+        "type": "raster",
+        "source": "orto",
+        "paint": {
+          "raster-opacity": [
+            "interpolate",
+            [
+              "linear"
+            ],
+            [
+              "zoom"
+            ],
+            16,
+            0,
+            18,
+            1
+          ]
+        },
+        "layout": {
+          "visibility": "visible"
+        },
+        "minzoom": 15
+      });
+
+    });
   }
 
   addMarker(coords: number[]): void {
@@ -66,6 +108,6 @@ export class MapService {
       type: 'LineString',
       coordinates: [position, treasure]
     });
-    this.map.fitBounds(bounds as LngLatBoundsLike, { padding: 10 })
+    this.map.fitBounds(bounds as LngLatBoundsLike, { padding: 30 })
   }
 }

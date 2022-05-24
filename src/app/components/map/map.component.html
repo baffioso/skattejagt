@@ -1,8 +1,9 @@
 <div id="map">
-  <div class="distance" *ngIf="distanceToTreasure$ | async as distance">
+  <div class="distance"
+       *ngIf="(store.distanceToTreasure$ | async) && (store.showTreasure$ | async) === false">
     <span>
-      Afstand: {{ distance }} m
+      Afstand: {{ store.distanceToTreasure$ | async }} m
     </span>
+    <h2>{{(treasureNumber$ | async)}} / {{(store.treasures$ | async)?.length}}</h2>
   </div>
 </div>
-

@@ -14,15 +14,16 @@ import { Feature, Point } from 'geojson'
 })
 export class MapComponent implements OnInit, AfterViewInit {
 
-  distanceToTreasure$: Observable<number>;
+  treasureNumber$ = this.store.treasureIndex$.pipe(
+    map(index => index + 1)
+  );
 
   constructor(
     private mapService: MapService,
-    private store: StoreService,
+    public store: StoreService,
   ) { }
 
   ngOnInit(): void {
-    this.distanceToTreasure$ = this.store.distanceToTreasure$
     this.store.showSummery$.subscribe(console.log)
   }
 

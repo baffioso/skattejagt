@@ -19,7 +19,7 @@ export class StoreService {
     .map(feature => ({ feature, sort: Math.random() }))
     .sort((a, b) => a.sort - b.sort)
     .map(({ feature }) => feature)
-    .slice(0, 2)
+    //.slice(0, 2)
 
   private _treasures$ = new BehaviorSubject<Feature<Point>[]>(this.shuffledTreasures)
   treasures$: Observable<Feature<Point>[]> = this._treasures$.asObservable();
@@ -51,7 +51,7 @@ export class StoreService {
       return Math.round(distance(userLocation, treasure.geometry.coordinates) * 1000)
     }),
     tap(distance => {
-      if (distance < 20000) {
+      if (distance < 2000) {
         this._showTreasure$.next(true)
       }
     }),
@@ -77,6 +77,7 @@ export class StoreService {
   nextTreasure(): void {
     if (this._treasureIndex$.value + 1 < this._treasures$.value.length) {
       this._treasureIndex$.next(this._treasureIndex$.value + 1)
+      this.localStorageService.add('treasureIndex', this._treasureIndex$.value);
     }
 
     this._showTreasure$.next(false);
