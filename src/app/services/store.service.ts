@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { filter, first, map, shareReplay, tap, switchMap, mergeMap } from 'rxjs/operators';
+import { filter, first, map, tap, switchMap } from 'rxjs/operators';
 import { Feature, GeoJsonProperties } from 'geojson';
 import distance from '@turf/distance';
 import { Point } from 'geojson'
@@ -9,10 +9,7 @@ import { treasures } from 'src/assets/treasures';
 import { LocalStorageService } from './local-storage.service';
 import { GeolocationService } from './geolocation.service';
 import { MapService } from './map.service';
-
-interface TreasureProperties {
-  bogstav: string;
-}
+import { TreasureProperties } from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -26,26 +23,26 @@ export class StoreService {
   //.slice(0, 2)
 
   private _treasures$ = new BehaviorSubject<Feature<Point, TreasureProperties>[]>(this.shuffledTreasures)
-  treasures$: Observable<Feature<Point>[]> = this._treasures$.asObservable()
+  treasures$: Observable<Feature<Point, TreasureProperties>[]> = this._treasures$.asObservable()
     .pipe(
       switchMap(() => this.localStorageService.get('treasures')),
       filter((treasures: any) => !!treasures),
-      map((treasures: Feature<Point>[]) => treasures)
+      map((treasures: Feature<Point, TreasureProperties>[]) => treasures)
     );
 
   private _treasureIndex$ = new BehaviorSubject<number>(0);
   treasureIndex$: Observable<number> = this._treasureIndex$.asObservable()
-    // .pipe(
-    //   switchMap(() => this.localStorageService.get('treasureIndex')),
-    //   filter((index: any) => !!index),
-    //   map((index: number) => index),
-    //   tap(console.log)
-    // );
+  // .pipe(
+  //   switchMap(() => this.localStorageService.get('treasureIndex')),
+  //   filter((index: any) => !!index),
+  //   map((index: number) => index),
+  //   tap(console.log)
+  // );
 
   private _showTreasure$ = new BehaviorSubject<boolean>(false);
   showTreasure$: Observable<boolean> = this._showTreasure$.asObservable();
 
-  private _showSummery$ = new BehaviorSubject<boolean>(false);
+  private _showSummery$ = new BehaviorSubject<boolean>(true);
   showSummery$: Observable<boolean> = this._showSummery$.asObservable();
 
   currentTreasure$ = combineLatest([

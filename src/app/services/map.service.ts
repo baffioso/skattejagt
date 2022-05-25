@@ -68,16 +68,16 @@ export class MapService {
             [
               "zoom"
             ],
-            16,
+            15,
             0,
-            18,
+            16,
             1
           ]
         },
         "layout": {
           "visibility": "visible"
         },
-        "minzoom": 15
+        "minzoom": 14
       }, 'label_road');
 
     });
@@ -92,7 +92,7 @@ export class MapService {
       this.removeMarker();
     }
 
-    this.marker = new Marker()
+    this.marker = new Marker(el)
       .setLngLat(coords as LngLatLike)
       .addTo(this.map);
   }

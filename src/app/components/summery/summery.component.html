@@ -1,5 +1,13 @@
 <div class="container">
+  <header>
+    <h1>Funde Skatte</h1>
+    <div class="close-summery" (click)="onCloseSummery()">
+      <span>X</span>
+    </div>
+  </header>
   <ng-container *ngIf="store.treasures$ | async as treasures">
-    <h1 *ngFor="let treasure of treasures">{{treasure.properties | json}}</h1>
+    <div class="treasures">
+      <span *ngFor="let treasure of treasures">{{treasure.properties.bogstav}}</span>
+    </div>
   </ng-container>
 </div>

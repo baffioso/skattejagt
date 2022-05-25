@@ -1,6 +1,7 @@
 import { FeatureCollection, Point } from 'geojson'
+import { TreasureProperties } from 'src/app/interfaces'
 
-export const treasures: FeatureCollection<Point, {bogstav: string}> = {
+export const treasures: FeatureCollection<Point, TreasureProperties> = {
   "type": "FeatureCollection",
   "features": [
     {

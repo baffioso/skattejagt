@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { StoreService } from 'src/app/services/store.service';
 
 @Component({
   selector: 'app-summery',
   templateUrl: './summery.component.html',
-  styleUrls: ['./summery.component.scss']
+  styleUrls: ['./summery.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SummeryComponent implements OnInit {
 
@@ -13,6 +14,10 @@ export class SummeryComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+  }
+
+  onCloseSummery(): void {
+    this.store.toggleSummery();
   }
 
 }

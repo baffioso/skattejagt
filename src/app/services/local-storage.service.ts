@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Feature, Point } from 'geojson';
 import { BehaviorSubject, Observable, of } from 'rxjs';
+import { TreasureProperties } from '../interfaces';
 
 type keys = 'treasures' | 'treasureIndex';
 
@@ -18,7 +19,7 @@ export class LocalStorageService {
     localStorage.setItem(key, JSON.stringify(value));
   }
 
-  get(key: keys): Observable<Feature<Point> | number | null> {
+  get(key: keys): Observable<Feature<Point, TreasureProperties> | number | null> {
     const storage = localStorage.getItem(key)
 
     if (storage) {

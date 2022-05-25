@@ -1,6 +1,6 @@
 <div id="map">
   <div class="distance"
-       *ngIf="(store.distanceToTreasure$ | async) && (store.showTreasure$ | async) === false">
+       *ngIf="showTopBar$ | async">
     <span>
       Afstand: {{ store.distanceToTreasure$ | async }} m
     </span>
