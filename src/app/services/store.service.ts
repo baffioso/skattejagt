@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { filter, first, map, shareReplay, tap, switchMap, mergeMap } from 'rxjs/operators';
-import { Feature } from 'geojson';
+import { Feature, GeoJsonProperties } from 'geojson';
 import distance from '@turf/distance';
 import { Point } from 'geojson'
 
@@ -10,18 +10,22 @@ import { LocalStorageService } from './local-storage.service';
 import { GeolocationService } from './geolocation.service';
 import { MapService } from './map.service';
 
+interface TreasureProperties {
+  bogstav: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class StoreService {
 
-  private shuffledTreasures: Feature<Point>[] = treasures.features
+  private shuffledTreasures: Feature<Point, TreasureProperties>[] = treasures.features
     .map(feature => ({ feature, sort: Math.random() }))
     .sort((a, b) => a.sort - b.sort)
     .map(({ feature }) => feature)
   //.slice(0, 2)
 
-  private _treasures$ = new BehaviorSubject<Feature<Point>[]>(this.shuffledTreasures)
+  private _treasures$ = new BehaviorSubject<Feature<Point, TreasureProperties>[]>(this.shuffledTreasures)
   treasures$: Observable<Feature<Point>[]> = this._treasures$.asObservable()
     .pipe(
       switchMap(() => this.localStorageService.get('treasures')),
@@ -40,6 +44,9 @@ export class StoreService {
 
   private _showTreasure$ = new BehaviorSubject<boolean>(false);
   showTreasure$: Observable<boolean> = this._showTreasure$.asObservable();
+
+  private _showSummery$ = new BehaviorSubject<boolean>(false);
+  showSummery$: Observable<boolean> = this._showSummery$.asObservable();
 
   currentTreasure$ = combineLatest([
     this.treasures$,
@@ -62,18 +69,18 @@ export class StoreService {
       return Math.round(distance(userLocation, treasure.geometry.coordinates) * 1000)
     }),
     tap(distance => {
-      if (distance < 20) {
+      if (distance < 20000) {
         this._showTreasure$.next(true)
       }
     })
   )
 
-  showSummery$: Observable<boolean> = combineLatest([
-    this.treasures$,
-    this.treasureIndex$
-  ]).pipe(
-    map(([treasures, index]) => treasures.length - 1 === index)
-  )
+  // showSummery$: Observable<boolean> = combineLatest([
+  //   this.treasures$,
+  //   this.treasureIndex$
+  // ]).pipe(
+  //   map(([treasures, index]) => treasures.length - 1 === index)
+  // )
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -104,6 +111,14 @@ export class StoreService {
         this.mapService.zoomTo(userLocation, treasure.geometry.coordinates)
       })
     ).subscribe()
+  }
+
+  toggleTreasure(): void {
+    this._showTreasure$.next(!this._showTreasure$.value);
+  }
+
+  toggleSummery(): void {
+    this._showSummery$.next(!this._showSummery$.value);
   }
 
 }

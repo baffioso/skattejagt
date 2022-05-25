@@ -1,3 +1,5 @@
 <div class="container">
-  <p>summery works!</p>
+  <ng-container *ngIf="store.treasures$ | async as treasures">
+    <h1 *ngFor="let treasure of treasures">{{treasure.properties | json}}</h1>
+  </ng-container>
 </div>

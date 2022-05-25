@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StoreService } from 'src/app/services/store.service';
 
 @Component({
   selector: 'app-summery',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SummeryComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public store: StoreService
+  ) { }
 
   ngOnInit(): void {
   }

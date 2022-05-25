@@ -2,9 +2,15 @@
   <div class="letter">
     <h1>{{ letter$ | async }}</h1>
   </div>
-  <button (click)="onNextTreasure()">
+  <button (click)="onNextTreasure()" *ngIf="(lastTreasure$ | async) === false">
     <span>
-      Næete
+      Næste
+    </span>
+    <img src="assets/treasure.png">
+  </button>
+  <button (click)="onShowSummery()" *ngIf="lastTreasure$ | async">
+    <span>
+      Se skatte
     </span>
     <img src="assets/treasure.png">
   </button>
