@@ -1,6 +1,7 @@
 <div id="map">
   <div class="distance"
-       *ngIf="showTopBar$ | async">
+       *ngIf="showTopBar$ | async"
+       (click)="store.toggleLanding()">
     <span>
       Afstand: {{ store.distanceToTreasure$ | async }} m
     </span>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { filter, first, map, tap, switchMap } from 'rxjs/operators';
-import { Feature, GeoJsonProperties } from 'geojson';
+import { Feature } from 'geojson';
 import distance from '@turf/distance';
 import { Point } from 'geojson'
 
@@ -38,6 +38,9 @@ export class StoreService {
   //   map((index: number) => index),
   //   tap(console.log)
   // );
+
+  private _showLanding$ = new BehaviorSubject<boolean>(true);
+  showLanding$: Observable<boolean> = this._showLanding$.asObservable();
 
   private _showTreasure$ = new BehaviorSubject<boolean>(false);
   showTreasure$: Observable<boolean> = this._showTreasure$.asObservable();
@@ -108,6 +111,10 @@ export class StoreService {
         this.mapService.zoomTo(userLocation, treasure.geometry.coordinates)
       })
     ).subscribe()
+  }
+
+  toggleLanding(): void {
+    this._showLanding$.next(!this._showLanding$.value);
   }
 
   toggleTreasure(): void {

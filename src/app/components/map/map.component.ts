@@ -17,9 +17,10 @@ export class MapComponent implements OnInit, AfterViewInit {
   showTopBar$: Observable<boolean> = combineLatest([
     this.store.distanceToTreasure$,
     this.store.showTreasure$,
-    this.store.showSummery$
+    this.store.showSummery$,
+    this.store.showLanding$
   ]).pipe(
-    map(([dist, treasure, summery]) => !!dist && !treasure && !summery)
+    map(([dist, treasure, summery, landing]) => !!dist && !treasure && !summery && !landing)
   )
 
   treasureNumber$ = this.store.treasureIndex$.pipe(

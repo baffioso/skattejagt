@@ -1,3 +1,4 @@
 <app-map></app-map>
-<app-treasure *ngIf="store.showTreasure$ | async"></app-treasure>
-<app-summery *ngIf="store.showSummery$ | async"></app-summery>
+<app-treasure *ngIf="store.showTreasure$ | async" [@inOutAnimation]></app-treasure>
+<app-summery *ngIf="store.showSummery$ | async" [@inOutAnimation]></app-summery>
+<app-landing *ngIf="store.showLanding$ | async" [@inOutAnimation]></app-landing>
