@@ -6,127 +6,127 @@ export const treasureRoutes: TreasureRoute[] = [
     name: 'Jack Sparrow',
     color: 'ef476f',
     treasures: [
-      {
-          "geometry": {
-              "coordinates": [
-                  12.576693,
-                  55.662712
-              ],
-              "type": "Point"
-          },
-          "id": 8,
-          "properties": {
-              "bogstav": "e",
-              "fid": 8
-          },
-          "type": "Feature"
-      },
-      {
-          "geometry": {
-              "coordinates": [
-                  12.573469,
-                  55.658486
-              ],
-              "type": "Point"
-          },
-          "id": 7,
-          "properties": {
-              "bogstav": "g",
-              "fid": 7
-          },
-          "type": "Feature"
-      },
-      {
-          "geometry": {
-              "coordinates": [
-                  12.57447,
-                  55.656976
-              ],
-              "type": "Point"
-          },
-          "id": 6,
-          "properties": {
-              "bogstav": "g",
-              "fid": 6
-          },
-          "type": "Feature"
-      },
-      {
-          "geometry": {
-              "coordinates": [
-                  12.577485,
-                  55.655574
-              ],
-              "type": "Point"
-          },
-          "id": 5,
-          "properties": {
-              "bogstav": "b",
-              "fid": 5
-          },
-          "type": "Feature"
-      },
-      {
-          "geometry": {
-              "coordinates": [
-                  12.578217,
-                  55.658212
-              ],
-              "type": "Point"
-          },
-          "id": 4,
-          "properties": {
-              "bogstav": "l",
-              "fid": 4
-          },
-          "type": "Feature"
-      },
-      {
-          "geometry": {
-              "coordinates": [
-                  12.574153,
-                  55.660272
-              ],
-              "type": "Point"
-          },
-          "id": 3,
-          "properties": {
-              "bogstav": "r",
-              "fid": 3
-          },
-          "type": "Feature"
-      },
-      {
-          "geometry": {
-              "coordinates": [
-                  12.573221,
-                  55.661684
-              ],
-              "type": "Point"
-          },
-          "id": 2,
-          "properties": {
-              "bogstav": "i",
-              "fid": 2
-          },
-          "type": "Feature"
-      },
-      {
-          "geometry": {
-              "coordinates": [
-                  12.572486,
-                  55.66407
-              ],
-              "type": "Point"
-          },
-          "id": 1,
-          "properties": {
-              "bogstav": "æ",
-              "fid": 1
-          },
-          "type": "Feature"
-      }
-  ]
+        {
+            "geometry": {
+                "coordinates": [
+                    12.576693,
+                    55.662712
+                ],
+                "type": "Point"
+            },
+            "id": 8,
+            "properties": {
+                "bogstav": "e",
+                "fid": 8
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    12.573469,
+                    55.658486
+                ],
+                "type": "Point"
+            },
+            "id": 7,
+            "properties": {
+                "bogstav": "g",
+                "fid": 7
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    12.57447,
+                    55.656976
+                ],
+                "type": "Point"
+            },
+            "id": 6,
+            "properties": {
+                "bogstav": "g",
+                "fid": 6
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    12.577485,
+                    55.655574
+                ],
+                "type": "Point"
+            },
+            "id": 5,
+            "properties": {
+                "bogstav": "b",
+                "fid": 5
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    12.578217,
+                    55.658212
+                ],
+                "type": "Point"
+            },
+            "id": 4,
+            "properties": {
+                "bogstav": "l",
+                "fid": 4
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    12.574153,
+                    55.660272
+                ],
+                "type": "Point"
+            },
+            "id": 3,
+            "properties": {
+                "bogstav": "r",
+                "fid": 3
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    12.573221,
+                    55.661684
+                ],
+                "type": "Point"
+            },
+            "id": 2,
+            "properties": {
+                "bogstav": "i",
+                "fid": 2
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    12.572486,
+                    55.66407
+                ],
+                "type": "Point"
+            },
+            "id": 1,
+            "properties": {
+                "bogstav": "æ",
+                "fid": 1
+            },
+            "type": "Feature"
+        }
+    ]
   },
   {
     name: 'Kaptajn Klo',
