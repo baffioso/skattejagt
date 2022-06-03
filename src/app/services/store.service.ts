@@ -22,12 +22,6 @@ export class StoreService {
 
   private _treasureIndex$ = new BehaviorSubject<number>(0);
   treasureIndex$: Observable<number> = this._treasureIndex$.asObservable()
-  // .pipe(
-  //   switchMap(() => this.localStorageService.get('treasureIndex')),
-  //   filter((index: any) => !!index),
-  //   map((index: number) => index),
-  //   tap(console.log)
-  // );
 
   private _showLanding$ = new BehaviorSubject<boolean>(true);
   showLanding$: Observable<boolean> = this._showLanding$.asObservable()
@@ -75,6 +69,13 @@ export class StoreService {
       tap(route => {
         this._selectedRoute$.next(route);
         this._showLanding$.next(false);
+      })
+    ).subscribe()
+
+    this.localStorageService.get('treasureIndex').pipe(
+      filter(index => !!index),
+      tap(index => {
+        this._treasureIndex$.next(index);
       })
     ).subscribe()
 
