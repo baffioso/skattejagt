@@ -1,6 +1,7 @@
 <div class="container">
-  <div class="card" (click)="onSelectRoute(route.route)" [style.background-color]="'#' + route.color" *ngFor="let route of routes">
-    <img src="/assets/treasure-map2.png" alt="" srcset="">
+  <!-- <p style="color: white;">{{store.routes$ | async | json}}</p> -->
+  <div class="card" (click)="onSelectRoute(route.name)" [style.background-color]="'#' + route.color" *ngFor="let route of store.routes$ | async">
+    <img src="assets/treasure-map2.png">
     <h1>{{route.name}}</h1>
   </div>
 </div>

@@ -1,34 +1,24 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { filter, first, map, tap, switchMap } from 'rxjs/operators';
-import { Feature } from 'geojson';
+import { filter, first, map, tap, switchMap, pluck, withLatestFrom } from 'rxjs/operators';
 import distance from '@turf/distance';
-import { Point } from 'geojson'
 
-import { treasures } from 'src/assets/treasures';
+import { treasureRoutes } from 'src/assets/treasures';
 import { LocalStorageService } from './local-storage.service';
 import { GeolocationService } from './geolocation.service';
 import { MapService } from './map.service';
-import { TreasureProperties } from '../interfaces';
+import { RouteNames, TreasureRoute } from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StoreService {
 
-  private shuffledTreasures: Feature<Point, TreasureProperties>[] = treasures.features
-    .map(feature => ({ feature, sort: Math.random() }))
-    .sort((a, b) => a.sort - b.sort)
-    .map(({ feature }) => feature)
-  //.slice(0, 2)
+  private _routes$ = new BehaviorSubject<TreasureRoute[]>(treasureRoutes);
+  routes$: Observable<TreasureRoute[]> = this._routes$.asObservable();
 
-  private _treasures$ = new BehaviorSubject<Feature<Point, TreasureProperties>[]>(this.shuffledTreasures)
-  treasures$: Observable<Feature<Point, TreasureProperties>[]> = this._treasures$.asObservable()
-    .pipe(
-      switchMap(() => this.localStorageService.get('treasures')),
-      filter((treasures: any) => !!treasures),
-      map((treasures: Feature<Point, TreasureProperties>[]) => treasures)
-    );
+  private _selectedRoute$ = new BehaviorSubject<TreasureRoute | null>(null);
+  selectedRoute$: Observable<TreasureRoute | null> = this._selectedRoute$.asObservable();
 
   private _treasureIndex$ = new BehaviorSubject<number>(0);
   treasureIndex$: Observable<number> = this._treasureIndex$.asObservable()
@@ -40,23 +30,23 @@ export class StoreService {
   // );
 
   private _showLanding$ = new BehaviorSubject<boolean>(true);
-  showLanding$: Observable<boolean> = this._showLanding$.asObservable();
+  showLanding$: Observable<boolean> = this._showLanding$.asObservable()
 
   private _showTreasure$ = new BehaviorSubject<boolean>(false);
   showTreasure$: Observable<boolean> = this._showTreasure$.asObservable();
 
-  private _showSummery$ = new BehaviorSubject<boolean>(false);
+  private _showSummery$ = new BehaviorSubject<boolean>(true);
   showSummery$: Observable<boolean> = this._showSummery$.asObservable();
 
   currentTreasure$ = combineLatest([
-    this.treasures$,
+    this.selectedRoute$,
     this.treasureIndex$,
     this.mapService.mapLoaded$
   ]).pipe(
-    filter(([, , mapLoaded]) => mapLoaded),
-    map(([treasues, index,]) => treasues[index]),
+    filter(([route, , mapLoaded]) => mapLoaded && !!route),
+    map(([route, index,]) => (route as TreasureRoute).treasures[index]),
     tap(treasure => this.mapService.addMarker(treasure.geometry.coordinates))
-  )
+  );
 
   distanceToTreasure$: Observable<number> = combineLatest([
     this.geolocationService.position$,
@@ -69,30 +59,29 @@ export class StoreService {
       return Math.round(distance(userLocation, treasure.geometry.coordinates) * 1000)
     }),
     tap(distance => {
-      if (distance < 20) {
+      if (distance < 3000) {
         this._showTreasure$.next(true)
       }
     })
-  )
-
-  // showSummery$: Observable<boolean> = combineLatest([
-  //   this.treasures$,
-  //   this.treasureIndex$
-  // ]).pipe(
-  //   map(([treasures, index]) => treasures.length - 1 === index)
-  // )
+  );
 
   constructor(
     private localStorageService: LocalStorageService,
     private geolocationService: GeolocationService,
     private mapService: MapService
-
   ) {
-    this.localStorageService.add('treasures', this._treasures$.value)
+    this.localStorageService.get('route').pipe(
+      filter(route => !!route),
+      tap(route => {
+        this._selectedRoute$.next(route);
+        this._showLanding$.next(false);
+      })
+    ).subscribe()
+
   }
 
   nextTreasure(): void {
-    if (this._treasureIndex$.value + 1 < this._treasures$.value.length) {
+    if (this._treasureIndex$.value + 1 < (this._selectedRoute$.value?.treasures.length as number)) {
       this._treasureIndex$.next(this._treasureIndex$.value + 1)
       this.localStorageService.add('treasureIndex', this._treasureIndex$.value);
     }
@@ -111,6 +100,15 @@ export class StoreService {
         this.mapService.zoomTo(userLocation, treasure.geometry.coordinates)
       })
     ).subscribe()
+  }
+
+  selectTreasureRoute(name: RouteNames): void {
+    const route = this._routes$.value.find(route => route.name = name);
+
+    if (route) {
+      this._selectedRoute$.next(route);
+      this.localStorageService.add('route', route);
+    }
   }
 
   toggleLanding(): void {

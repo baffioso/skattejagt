@@ -44,12 +44,15 @@
     align-items: center;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    overflow-x: auto;
 
     span {
       width: 50%;
       color: white;
       text-transform: uppercase;
       font-size: 8rem;
+      text-align: center;
+      border: 1px solid white;
     }
 
   }

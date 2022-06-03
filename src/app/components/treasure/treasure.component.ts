@@ -25,10 +25,10 @@ export class TreasureComponent implements OnInit, AfterViewInit {
     )
 
     this.lastTreasure$ = combineLatest([
-      this.store.treasures$,
+      this.store.selectedRoute$,
       this.store.treasureIndex$
     ]).pipe(
-      map(([treasures, index]) => treasures.length - 1 === index)
+      map(([treasures, index]) => (treasures?.treasures as any).length - 1 === index)
     )
   }
 
