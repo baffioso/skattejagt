@@ -37,21 +37,6 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.mapService.initMap();
-
-    combineLatest([
-      this.geolocationService.position$,
-      this.store.currentTreasure$,
-      this.mapService.mapLoaded$
-    ]).pipe(
-      first(),
-      filter(([, , mapLoaded]) => mapLoaded),
-      tap(([position, treasure, ]) => {
-
-        const userLocation = [position.coords.longitude, position.coords.latitude]
-
-        this.mapService.zoomTo(userLocation, treasure.geometry.coordinates)
-      })
-    ).subscribe()
   }
 
   onReset() {

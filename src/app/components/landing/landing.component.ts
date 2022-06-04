@@ -14,6 +14,7 @@ export class LandingComponent {
   onSelectRoute(route: RouteNames): void {
     this.store.selectRoute(route);
     this.store.toggleLanding();
+    this.store.zoomToTreasure();
   }
 
 }

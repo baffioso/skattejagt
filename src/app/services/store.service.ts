@@ -129,4 +129,22 @@ export class StoreService {
     this._showSummery$.next(!this._showSummery$.value);
   }
 
+  zoomToTreasure(): void {
+
+    combineLatest([
+      this.geolocationService.position$,
+      this.currentTreasure$,
+      this.mapService.mapLoaded$
+    ]).pipe(
+      first(),
+      filter(([, , mapLoaded]) => mapLoaded),
+      tap(([position, treasure, ]) => {
+
+        const userLocation = [position.coords.longitude, position.coords.latitude]
+
+        this.mapService.zoomTo(userLocation, treasure.geometry.coordinates)
+      })
+    ).subscribe()
+  }
+
 }
