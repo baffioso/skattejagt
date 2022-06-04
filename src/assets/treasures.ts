@@ -243,43 +243,64 @@ export const treasureRoutes: TreasureRoute[] = [
     color: '#118ab2',
     treasures: [
       {
-        "type": "Feature",
-        "properties": {
-          "bogstav": "a"
-        },
         "geometry": {
-          "type": "Point",
           "coordinates": [
-            12.577564716339111,
-            55.667940406235374
-          ]
-        }
+            12.618489,
+            55.690406
+          ],
+          "type": "Point"
+        },
+        "id": 12,
+        "properties": {
+          "bogstav": "d",
+          "fid": 12
+        },
+        "type": "Feature"
       },
       {
-        "type": "Feature",
-        "properties": {
-          "bogstav": "b"
-        },
         "geometry": {
-          "type": "Point",
           "coordinates": [
-            12.576497197151184,
-            55.66745935379183
-          ]
-        }
+            12.617375,
+            55.689969
+          ],
+          "type": "Point"
+        },
+        "id": 9,
+        "properties": {
+          "bogstav": "o",
+          "fid": 9
+        },
+        "type": "Feature"
       },
       {
-        "type": "Feature",
-        "properties": {
-          "bogstav": "e"
-        },
         "geometry": {
-          "type": "Point",
           "coordinates": [
-            12.57591515779495,
-            55.66709931696172
-          ]
-        }
+            12.617883,
+            55.69074
+          ],
+          "type": "Point"
+        },
+        "id": 10,
+        "properties": {
+          "bogstav": "n",
+          "fid": 10
+        },
+        "type": "Feature"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            12.61926,
+            55.690461
+          ],
+          "type": "Point"
+        },
+        "id": 11,
+        "properties": {
+          "bogstav": "e",
+          "fid": 11
+        },
+        "type": "Feature"
       }
     ]
   },
