@@ -33,7 +33,7 @@ export class StoreService {
   private _showTreasure$ = new BehaviorSubject<boolean>(false);
   showTreasure$: Observable<boolean> = this._showTreasure$.asObservable();
 
-  private _showSummery$ = new BehaviorSubject<boolean>(true);
+  private _showSummery$ = new BehaviorSubject<boolean>(false);
   showSummery$: Observable<boolean> = this._showSummery$.asObservable();
 
   currentTreasure$ = combineLatest([
