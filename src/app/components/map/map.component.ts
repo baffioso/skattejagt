@@ -1,6 +1,6 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { combineLatest, Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, first, filter } from 'rxjs/operators';
 import { GeolocationService } from 'src/app/services/geolocation.service';
 import { MapService } from 'src/app/services/map.service';
 import { StoreService } from 'src/app/services/store.service';
@@ -15,7 +15,8 @@ import { Feature, Point } from 'geojson'
 export class MapComponent implements OnInit, AfterViewInit {
 
   store = inject(StoreService);
-  mapService = inject(MapService);
+  private mapService = inject(MapService);
+  private geolocationService = inject(GeolocationService);
 
   showTopBar$: Observable<boolean> = combineLatest([
     this.store.distanceToTreasure$,
@@ -36,6 +37,21 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.mapService.initMap();
+
+    combineLatest([
+      this.geolocationService.position$,
+      this.store.currentTreasure$,
+      this.mapService.mapLoaded$
+    ]).pipe(
+      first(),
+      filter(([, , mapLoaded]) => mapLoaded),
+      tap(([position, treasure, ]) => {
+
+        const userLocation = [position.coords.longitude, position.coords.latitude]
+
+        this.mapService.zoomTo(userLocation, treasure.geometry.coordinates)
+      })
+    ).subscribe()
   }
 
   onReset() {
