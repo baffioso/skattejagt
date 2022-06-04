@@ -39,6 +39,6 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-      // this.store.initStore();
+      this.store.initStore();
   }
 }
