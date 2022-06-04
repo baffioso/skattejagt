@@ -40,5 +40,10 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.mapService.initMap();
   }
 
+  onReset() {
+    if(confirm('Er du sikker på du vil nulstille?')) {
+      this.store.reset();
+    }
+  }
 
 }

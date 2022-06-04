@@ -1,10 +1,9 @@
-import { FeatureCollection, Point } from 'geojson';
-import { TreasureRoute, TreasureProperties } from 'src/app/interfaces';
+import { TreasureRoute } from 'src/app/interfaces';
 
 export const treasureRoutes: TreasureRoute[] = [
   {
     name: 'Jack Sparrow',
-    color: 'ef476f',
+    color: '#ef476f',
     treasures: [
         {
             "geometry": {
@@ -130,7 +129,7 @@ export const treasureRoutes: TreasureRoute[] = [
   },
   {
     name: 'Kaptajn Klo',
-    color: 'ffd166',
+    color: '#ffd166',
     treasures: [
       {
         "type": "Feature",
@@ -175,7 +174,7 @@ export const treasureRoutes: TreasureRoute[] = [
   },
   {
     name: 'Sortskæg',
-    color: '118ab2',
+    color: '#118ab2',
     treasures: [
       {
         "type": "Feature",
@@ -219,8 +218,8 @@ export const treasureRoutes: TreasureRoute[] = [
     ]
   },
   {
-    name: 'Graystoke',
-    color: '073b4c',
+    name: 'Kløvedal',
+    color: '#073b4c',
     treasures: [
       {
         "type": "Feature",
@@ -265,7 +264,7 @@ export const treasureRoutes: TreasureRoute[] = [
   },
   {
     name: 'Knud Rasmussen',
-    color: '22333b',
+    color: '#e38902',
     treasures: [
       {
         "type": "Feature",
@@ -310,7 +309,7 @@ export const treasureRoutes: TreasureRoute[] = [
   },
   {
     name: 'Napoleon',
-    color: '3d348b',
+    color: '#3d348b',
     treasures: [
       {
         "type": "Feature",
@@ -355,7 +354,7 @@ export const treasureRoutes: TreasureRoute[] = [
   },
   {
     name: 'Kaptajn Haddock',
-    color: 'c6ac8f',
+    color: '#c6ac8f',
     treasures: [
       {
         "type": "Feature",
@@ -400,7 +399,7 @@ export const treasureRoutes: TreasureRoute[] = [
   },
   {
     name: 'Kaptajn Skæg',
-    color: '5e503f',
+    color: '#5e503f',
     treasures: [
       {
         "type": "Feature",

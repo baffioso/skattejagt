@@ -3,7 +3,7 @@ import { Feature, FeatureCollection, Point } from 'geojson';
 export type RouteNames = 'Jack Sparrow' |
   'Kaptajn Klo' |
   'Sortskæg' |
-  'Graystoke' |
+  'Kløvedal' |
   'Knud Rasmussen' |
   'Napoleon' |
   'Kaptajn Haddock' |

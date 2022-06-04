@@ -1,7 +1,7 @@
 <div id="map">
   <div class="distance"
        *ngIf="showTopBar$ | async">
-    <span>
+    <span (click)="onReset()">
       Afstand: {{ store.distanceToTreasure$ | async }} m
     </span>
     <h2 (click)="store.nextTreasure()">{{treasureNumber$ | async}} / {{(store.selectedRoute$ | async)?.treasures?.length}}</h2>

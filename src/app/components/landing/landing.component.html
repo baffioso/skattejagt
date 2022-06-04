@@ -1,7 +1,14 @@
 <div class="container">
+
+  <header>
+    <h1>Vælg rute</h1>
+  </header>
+
   <!-- <p style="color: white;">{{store.routes$ | async | json}}</p> -->
-  <div class="card" (click)="onSelectRoute(route.name)" [style.background-color]="'#' + route.color" *ngFor="let route of store.routes$ | async">
-    <img src="assets/treasure-map2.png">
-    <h1>{{route.name}}</h1>
+  <div class="routes">
+    <div class="card" (click)="onSelectRoute(route.name)" [style.background-color]="route.color" *ngFor="let route of store.routes$ | async">
+      <img src="assets/treasure-map2.png">
+      <h1>{{route.name}}</h1>
+    </div>
   </div>
 </div>

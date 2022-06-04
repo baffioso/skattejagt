@@ -63,7 +63,9 @@ export class StoreService {
     private localStorageService: LocalStorageService,
     private geolocationService: GeolocationService,
     private mapService: MapService
-  ) {
+  ) { }
+
+  initStore(): void {
     this.localStorageService.get('route').pipe(
       filter(route => !!route),
       tap(route => {
@@ -78,7 +80,6 @@ export class StoreService {
         this._treasureIndex$.next(index);
       })
     ).subscribe()
-
   }
 
   nextTreasure(): void {
@@ -103,13 +104,21 @@ export class StoreService {
     ).subscribe()
   }
 
-  selectTreasureRoute(name: RouteNames): void {
-    const route = this._routes$.value.find(route => route.name = name);
+  selectRoute(name: RouteNames): void {
+    const route = this._routes$.value.find(route => route.name === name);
 
     if (route) {
-      this._selectedRoute$.next(route);
+      this._selectedRoute$.next(route as any);
       this.localStorageService.add('route', route);
     }
+  }
+
+  reset() {
+    this._selectedRoute$.next(null);
+    this._treasureIndex$.next(0);
+    this._showLanding$.next(true);
+    this.localStorageService.remove('route');
+    this.localStorageService.remove('treasureIndex');
   }
 
   toggleLanding(): void {
