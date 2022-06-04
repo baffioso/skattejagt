@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { combineLatest, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { GeolocationService } from 'src/app/services/geolocation.service';
@@ -14,6 +14,9 @@ import { Feature, Point } from 'geojson'
 })
 export class MapComponent implements OnInit, AfterViewInit {
 
+  store = inject(StoreService);
+  mapService = inject(MapService);
+
   showTopBar$: Observable<boolean> = combineLatest([
     this.store.distanceToTreasure$,
     this.store.showTreasure$,
@@ -26,11 +29,6 @@ export class MapComponent implements OnInit, AfterViewInit {
   treasureNumber$ = this.store.treasureIndex$.pipe(
     map(index => index + 1)
   );
-
-  constructor(
-    private mapService: MapService,
-    public store: StoreService,
-  ) { }
 
   ngOnInit(): void {
     this.store.showSummery$.subscribe(console.log)

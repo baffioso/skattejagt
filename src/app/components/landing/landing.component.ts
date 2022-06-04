@@ -11,10 +11,6 @@ export class LandingComponent {
 
   store = inject(StoreService);
 
-  constructor(
-    // public store: StoreService
-  ) { }
-
   onSelectRoute(route: RouteNames): void {
     this.store.selectRoute(route);
     this.store.toggleLanding();

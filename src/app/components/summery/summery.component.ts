@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { StoreService } from 'src/app/services/store.service';
 
 @Component({
@@ -9,14 +9,17 @@ import { StoreService } from 'src/app/services/store.service';
 })
 export class SummeryComponent implements OnInit {
 
-  constructor(
-    public store: StoreService
-  ) { }
+  store = inject(StoreService)
 
   ngOnInit(): void {
   }
 
   onCloseSummery(): void {
+    this.store.toggleSummery();
+  }
+
+  onPlayAgain(): void {
+    this.store.reset();
     this.store.toggleSummery();
   }
 

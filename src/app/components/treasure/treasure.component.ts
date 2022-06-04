@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import confetti from 'canvas-confetti';
@@ -12,12 +12,10 @@ import { StoreService } from 'src/app/services/store.service';
 })
 export class TreasureComponent implements OnInit, AfterViewInit {
 
+  store = inject(StoreService)
+
   letter$: Observable<string>;
   lastTreasure$: Observable<boolean>;
-
-  constructor(
-    public store: StoreService
-  ) { }
 
   ngOnInit(): void {
     this.letter$ = this.store.currentTreasure$.pipe(
@@ -38,6 +36,7 @@ export class TreasureComponent implements OnInit, AfterViewInit {
 
   onNextTreasure(): void {
     this.store.nextTreasure();
+    this.store.toggleTreasure();
   }
 
   onShowSummery(): void {

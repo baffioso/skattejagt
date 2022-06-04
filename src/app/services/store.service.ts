@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { filter, first, map, tap, switchMap, pluck, withLatestFrom } from 'rxjs/operators';
 import distance from '@turf/distance';
@@ -13,6 +13,10 @@ import { RouteNames, TreasureRoute } from '../interfaces';
   providedIn: 'root'
 })
 export class StoreService {
+
+  private localStorageService = inject(LocalStorageService)
+  private geolocationService = inject(GeolocationService)
+  private mapService = inject(MapService)
 
   private _routes$ = new BehaviorSubject<TreasureRoute[]>(treasureRoutes);
   routes$: Observable<TreasureRoute[]> = this._routes$.asObservable();
@@ -29,7 +33,7 @@ export class StoreService {
   private _showTreasure$ = new BehaviorSubject<boolean>(false);
   showTreasure$: Observable<boolean> = this._showTreasure$.asObservable();
 
-  private _showSummery$ = new BehaviorSubject<boolean>(false);
+  private _showSummery$ = new BehaviorSubject<boolean>(true);
   showSummery$: Observable<boolean> = this._showSummery$.asObservable();
 
   currentTreasure$ = combineLatest([
@@ -59,12 +63,6 @@ export class StoreService {
     })
   );
 
-  constructor(
-    private localStorageService: LocalStorageService,
-    private geolocationService: GeolocationService,
-    private mapService: MapService
-  ) { }
-
   initStore(): void {
     this.localStorageService.get('route').pipe(
       filter(route => !!route),
@@ -87,8 +85,6 @@ export class StoreService {
       this._treasureIndex$.next(this._treasureIndex$.value + 1)
       this.localStorageService.add('treasureIndex', this._treasureIndex$.value);
     }
-
-    this._showTreasure$.next(false);
 
     combineLatest([
       this.geolocationService.position$,
