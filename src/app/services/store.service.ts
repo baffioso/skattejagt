@@ -43,7 +43,7 @@ export class StoreService {
   ]).pipe(
     filter(([route, , mapLoaded]) => mapLoaded && !!route),
     map(([route, index,]) => (route as TreasureRoute).treasures[index]),
-    tap(treasure => this.mapService.addMarker(treasure.geometry.coordinates))
+    tap(treasure => this.mapService.addMarker(treasure.geometry.coordinates, 'treasure-map-icon'))
   );
 
   distanceToTreasure$: Observable<number> = combineLatest([

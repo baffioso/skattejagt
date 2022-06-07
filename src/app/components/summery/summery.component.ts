@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { StoreService } from 'src/app/services/store.service';
+import {treasureRoutes} from 'src/assets/treasures';
+import confetti from 'canvas-confetti';
 
 @Component({
   selector: 'app-summery',
@@ -7,12 +9,21 @@ import { StoreService } from 'src/app/services/store.service';
   styleUrls: ['./summery.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SummeryComponent implements OnInit {
+export class SummeryComponent implements AfterViewInit {
 
   store = inject(StoreService)
+  colors = [
+    ...treasureRoutes.map(route => route.color),
+    ...treasureRoutes.map(route => route.color)
+  ];
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
+    confetti({
+      particleCount: 1000,
+      spread: 360
+    })
   }
+
 
   onCloseSummery(): void {
     this.store.toggleSummery();

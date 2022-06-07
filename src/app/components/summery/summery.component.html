@@ -7,7 +7,7 @@
   </header>
   <ng-container *ngIf="(store.selectedRoute$ | async)?.treasures as treasures">
     <div class="treasures">
-      <span *ngFor="let treasure of treasures">{{treasure.properties.bogstav}}</span>
+      <span *ngFor="let treasure of treasures; let i = index" [style.background-color]="colors[i]">{{treasure.properties.bogstav}}</span>
     </div>
   </ng-container>
 </div>

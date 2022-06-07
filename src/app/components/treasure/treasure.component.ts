@@ -31,7 +31,10 @@ export class TreasureComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    confetti();
+    confetti({
+      particleCount: 1000,
+      spread: 360
+    });
   }
 
   onNextTreasure(): void {

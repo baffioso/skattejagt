@@ -1,20 +1,23 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Map, GeolocateControl, ScaleControl, Marker, LngLatLike, LngLatBoundsLike } from 'maplibre-gl';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import bbox from '@turf/bbox';
+import { GeolocationService } from './geolocation.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MapService {
 
+  locationService = inject(GeolocationService)
+
   map: Map;
   marker: Marker;
+  userMarker: Marker;
 
   private _mapLoaded$ = new BehaviorSubject<boolean>(false);
   mapLoaded$: Observable<boolean> = this._mapLoaded$.asObservable();
-
-  constructor() { }
 
   initMap(): void {
     this.map = new Map({
@@ -80,13 +83,30 @@ export class MapService {
         "minzoom": 14
       }, 'label_road');
 
+      this.locationService.position$.pipe(
+        tap(location => {
+          const userLocation = [location.coords.longitude, location.coords.latitude]
+
+          const el = document.createElement('div');
+          el.className = 'pirate-map-icon';
+
+          if (this.userMarker) {
+            this.userMarker.remove();
+          }
+
+          this.userMarker = new Marker(el)
+            .setLngLat(userLocation as LngLatLike)
+            .addTo(this.map);
+        })
+      ).subscribe()
+
     });
   }
 
-  addMarker(coords: number[]): void {
+  addMarker(coords: number[], icon: 'treasure-map-icon' | 'pirate-map-icon'): void {
 
     const el = document.createElement('div');
-    el.className = 'treasure-map-icon';
+    el.className = icon;
 
     if (this.marker) {
       this.removeMarker();
