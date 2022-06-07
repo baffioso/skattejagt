@@ -94,7 +94,7 @@ export class MapService {
             this.userMarker.remove();
           }
 
-          this.userMarker = new Marker(el)
+          this.userMarker = new Marker(el, {anchor: 'bottom'})
             .setLngLat(userLocation as LngLatLike)
             .addTo(this.map);
         })
