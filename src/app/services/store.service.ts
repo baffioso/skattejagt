@@ -57,7 +57,7 @@ export class StoreService {
       return Math.round(distance(userLocation, treasure.geometry.coordinates) * 1000)
     }),
     tap(distance => {
-      if (distance < 20) {
+      if (distance < 10) {
         this._showTreasure$.next(true)
       }
     })

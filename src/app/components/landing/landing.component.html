@@ -7,7 +7,7 @@
   <!-- <p style="color: white;">{{store.routes$ | async | json}}</p> -->
   <div class="routes">
     <div class="card" (click)="onSelectRoute(route.name)" [style.background-color]="route.color" *ngFor="let route of store.routes$ | async">
-      <img src="assets/treasure-map2.png">
+      <img src="assets/treasure-map.png">
       <h1>{{route.name}}</h1>
     </div>
   </div>
