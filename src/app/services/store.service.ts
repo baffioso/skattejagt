@@ -14,9 +14,9 @@ import { RouteNames, TreasureRoute } from '../interfaces';
 })
 export class StoreService {
 
-  private localStorageService = inject(LocalStorageService)
-  private geolocationService = inject(GeolocationService)
-  private mapService = inject(MapService)
+  private localStorageService = inject(LocalStorageService);
+  private geolocationService = inject(GeolocationService);
+  private mapService = inject(MapService);
 
   private _routes$ = new BehaviorSubject<TreasureRoute[]>(treasureRoutes);
   routes$: Observable<TreasureRoute[]> = this._routes$.asObservable();
