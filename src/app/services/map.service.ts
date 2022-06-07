@@ -13,8 +13,8 @@ export class MapService {
   locationService = inject(GeolocationService)
 
   map: Map;
-  marker: Marker;
   userMarker: Marker;
+  treasureMarker: Marker;
 
   private _mapLoaded$ = new BehaviorSubject<boolean>(false);
   mapLoaded$: Observable<boolean> = this._mapLoaded$.asObservable();
@@ -33,17 +33,19 @@ export class MapService {
         positionOptions: {
           enableHighAccuracy: true
         },
-        trackUserLocation: true
+        trackUserLocation: true,
+        showAccuracyCircle: false,
+        showUserLocation: false
       }),
       'bottom-right'
     );
 
-    const scale = new ScaleControl({
-      maxWidth: 200,
-      unit: 'metric'
-    });
-
-    this.map.addControl(scale);
+    this.map.addControl(
+      new ScaleControl({
+        maxWidth: 200,
+        unit: 'metric'
+      })
+    );
 
     this.map.on('load', () => {
 
@@ -108,17 +110,17 @@ export class MapService {
     const el = document.createElement('div');
     el.className = icon;
 
-    if (this.marker) {
+    if (this.treasureMarker) {
       this.removeMarker();
     }
 
-    this.marker = new Marker(el)
+    this.treasureMarker = new Marker(el)
       .setLngLat(coords as LngLatLike)
       .addTo(this.map);
   }
 
   removeMarker(): void {
-    this.marker.remove();
+    this.treasureMarker.remove();
   }
 
   zoomTo(position: number[], treasure: number[]) {

@@ -138,7 +138,7 @@ export class StoreService {
     ]).pipe(
       first(),
       filter(([, , mapLoaded]) => mapLoaded),
-      tap(([position, treasure, ]) => {
+      tap(([position, treasure,]) => {
 
         const userLocation = [position.coords.longitude, position.coords.latitude]
 
