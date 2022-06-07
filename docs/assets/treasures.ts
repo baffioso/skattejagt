@@ -309,43 +309,124 @@ export const treasureRoutes: TreasureRoute[] = [
     color: '#073b4c',
     treasures: [
       {
-        "type": "Feature",
-        "properties": {
-          "bogstav": "a"
-        },
         "geometry": {
-          "type": "Point",
           "coordinates": [
-            12.577564716339111,
-            55.667940406235374
-          ]
-        }
+            12.574623,
+            55.665388
+          ],
+          "type": "Point"
+        },
+        "id": 9,
+        "properties": {
+          "bogstav": "b",
+          "fid": 9
+        },
+        "type": "Feature"
       },
       {
-        "type": "Feature",
-        "properties": {
-          "bogstav": "b"
-        },
         "geometry": {
-          "type": "Point",
           "coordinates": [
-            12.576497197151184,
-            55.66745935379183
-          ]
-        }
+            12.574983,
+            55.665636
+          ],
+          "type": "Point"
+        },
+        "id": 10,
+        "properties": {
+          "bogstav": "l",
+          "fid": 10
+        },
+        "type": "Feature"
       },
       {
-        "type": "Feature",
-        "properties": {
-          "bogstav": "e"
-        },
         "geometry": {
-          "type": "Point",
           "coordinates": [
-            12.57591515779495,
-            55.66709931696172
-          ]
-        }
+            12.574673,
+            55.665975
+          ],
+          "type": "Point"
+        },
+        "id": 11,
+        "properties": {
+          "bogstav": "i",
+          "fid": 11
+        },
+        "type": "Feature"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            12.573989,
+            55.665803
+          ],
+          "type": "Point"
+        },
+        "id": 12,
+        "properties": {
+          "bogstav": "æ",
+          "fid": 12
+        },
+        "type": "Feature"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            12.574064,
+            55.66552
+          ],
+          "type": "Point"
+        },
+        "id": 13,
+        "properties": {
+          "bogstav": "e",
+          "fid": 13
+        },
+        "type": "Feature"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            12.573613,
+            55.665224
+          ],
+          "type": "Point"
+        },
+        "id": 14,
+        "properties": {
+          "bogstav": "g",
+          "fid": 14
+        },
+        "type": "Feature"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            12.573885,
+            55.664816
+          ],
+          "type": "Point"
+        },
+        "id": 15,
+        "properties": {
+          "bogstav": "r",
+          "fid": 15
+        },
+        "type": "Feature"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            12.574413,
+            55.665145
+          ],
+          "type": "Point"
+        },
+        "id": 16,
+        "properties": {
+          "bogstav": "g",
+          "fid": 16
+        },
+        "type": "Feature"
       }
     ]
   },
