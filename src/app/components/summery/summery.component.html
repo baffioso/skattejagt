@@ -1,8 +1,8 @@
 <div class="container">
   <header>
     <h1>Funde Skatte</h1>
-    <div class="close-summery" (click)="onCloseSummery()">
-      <span>X</span>
+    <div class="actions">
+      <span class="replay" (click)="onPlayAgain()"><img src="assets/replay-64.png" alt="" srcset=""></span>
     </div>
   </header>
   <ng-container *ngIf="(store.selectedRoute$ | async)?.treasures as treasures">

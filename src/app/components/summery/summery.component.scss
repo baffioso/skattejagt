@@ -16,26 +16,26 @@
     background-color: rgb(65, 149, 158);
     display: flex;
     align-items: center;
-    justify-content: center;
-
+    justify-content: space-between;
+    padding: 0 20px;
 
     h1 {
       margin: 0;
       color: white;
     }
 
-    .close-summery {
-      position: absolute;
-      right: 10px;
-      top: 10px;
-      color: white;
+    .replay {
+      cursor: pointer;
 
-      span {
-        font-family: monospace;
-        font-size: x-large;
+      img {
+        vertical-align: middle;
+      }
+
+      img:hover {
+        background-color: rgb(125, 246, 131);
+        border-radius: 50%;
       }
     }
-
   }
 
   .treasures {

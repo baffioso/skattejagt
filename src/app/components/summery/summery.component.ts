@@ -24,14 +24,7 @@ export class SummeryComponent implements AfterViewInit {
     })
   }
 
-
-  onCloseSummery(): void {
-    this.store.toggleSummery();
-  }
-
   onPlayAgain(): void {
     this.store.reset();
-    this.store.toggleSummery();
   }
-
 }
