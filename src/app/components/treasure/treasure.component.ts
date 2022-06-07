@@ -31,13 +31,16 @@ export class TreasureComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    confetti({
-      particleCount: 1000,
-      spread: 360
-    });
 
     const audio = new Audio('assets/tada.mp3')
     audio.play();
+
+    setTimeout(() => {
+      confetti({
+        particleCount: 1000,
+        spread: 360
+      })
+    }, 2500);
   }
 
   onNextTreasure(): void {
@@ -46,8 +49,8 @@ export class TreasureComponent implements OnInit, AfterViewInit {
   }
 
   onShowSummery(): void {
-    this.store.toggleTreasure();
     this.store.toggleSummery();
+    this.store.toggleTreasure();
   }
 
 }

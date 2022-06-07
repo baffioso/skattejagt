@@ -18,13 +18,15 @@ export class SummeryComponent implements AfterViewInit {
   ];
 
   ngAfterViewInit(): void {
-    confetti({
-      particleCount: 1000,
-      spread: 360
-    })
-
     const audio = new Audio('assets/tada.mp3')
     audio.play();
+
+    setTimeout(() => {
+      confetti({
+        particleCount: 1000,
+        spread: 360
+      })
+    }, 2500);
   }
 
   onPlayAgain(): void {
