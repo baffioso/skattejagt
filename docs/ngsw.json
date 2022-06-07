@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1654608400072,
+  "timestamp": 1654618972903,
   "index": "/skattejagt/index.html",
   "assetGroups": [
     {
@@ -17,7 +17,7 @@
         "/skattejagt/manifest.webmanifest",
         "/skattejagt/polyfills.3c5b47ffb396d485.js",
         "/skattejagt/runtime.1e966b4813ff92d9.js",
-        "/skattejagt/styles.74e7111ccb98573e.css"
+        "/skattejagt/styles.5b641d42da9d54ef.css"
       ],
       "patterns": []
     },
@@ -38,13 +38,14 @@
         "/skattejagt/assets/icons/icon-512x512.png",
         "/skattejagt/assets/icons/icon-72x72.png",
         "/skattejagt/assets/icons/icon-96x96.png",
+        "/skattejagt/assets/pirate.gif",
         "/skattejagt/assets/pirate.png",
         "/skattejagt/assets/treasure-map.png",
         "/skattejagt/assets/treasure.png",
         "/skattejagt/assets/treasure_20.png",
         "/skattejagt/assets/treasure_33.png",
         "/skattejagt/assets/treasures.ts",
-        "/skattejagt/pirate.f92cb93e2c342a92.png",
+        "/skattejagt/pirate.59ce3b4bca074094.gif",
         "/skattejagt/treasure_33.d729594d64303d56.png"
       ],
       "patterns": []
@@ -61,6 +62,7 @@
     "/skattejagt/assets/icons/icon-512x512.png": "5d67e13ca7e018af3b033b86fb1c9111ca7071a6",
     "/skattejagt/assets/icons/icon-72x72.png": "f259612bfea7b2b7c570133dfaac275bd9d0854b",
     "/skattejagt/assets/icons/icon-96x96.png": "d8ad39c3d3204785011c9f96c227acac28c2449b",
+    "/skattejagt/assets/pirate.gif": "1e9fa147d3c549f461e407cc0be9b60ec77ba37a",
     "/skattejagt/assets/pirate.png": "88fc0a5edff9991dff01d189307d9e3b3982f30c",
     "/skattejagt/assets/treasure-map.png": "ca5b263d8fcf5bc143cbfd4385a8ba8096206e9c",
     "/skattejagt/assets/treasure.png": "eec90ea7d654a772de75c529c90f787f54c2898c",
@@ -68,13 +70,13 @@
     "/skattejagt/assets/treasure_33.png": "d01478419f9d2400c9d59140358b2414f9cee277",
     "/skattejagt/assets/treasures.ts": "55caa4d87fee1ee4e8f4bd17898e63ab6a057eb1",
     "/skattejagt/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/skattejagt/index.html": "f14c7652bc26b8d245a6d2b81df4fea01517e670",
+    "/skattejagt/index.html": "356695b2e2948ed2edb4d5d095485213460b9859",
     "/skattejagt/main.310d1db645f9566b.js": "a3eff01847f5e38d7058eb33438669892ae9f899",
     "/skattejagt/manifest.webmanifest": "501560baac25549610ec25e874f55eff5674e18e",
-    "/skattejagt/pirate.f92cb93e2c342a92.png": "88fc0a5edff9991dff01d189307d9e3b3982f30c",
+    "/skattejagt/pirate.59ce3b4bca074094.gif": "1e9fa147d3c549f461e407cc0be9b60ec77ba37a",
     "/skattejagt/polyfills.3c5b47ffb396d485.js": "8ccd8f016647228d77f544803fc4c11fb43750a8",
     "/skattejagt/runtime.1e966b4813ff92d9.js": "c0387f064e0640a524de25c5702ae121e31deb4d",
-    "/skattejagt/styles.74e7111ccb98573e.css": "8075a9cd87a77891fa892e4da9d5aa8d48d69afd",
+    "/skattejagt/styles.5b641d42da9d54ef.css": "52fe8c0f1d0ef037857b89b5f0a77727689bb4ed",
     "/skattejagt/treasure_33.d729594d64303d56.png": "d01478419f9d2400c9d59140358b2414f9cee277"
   },
   "navigationUrls": [
