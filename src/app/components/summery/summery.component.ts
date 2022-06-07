@@ -22,6 +22,9 @@ export class SummeryComponent implements AfterViewInit {
       particleCount: 1000,
       spread: 360
     })
+
+    const audio = new Audio('assets/tada.mp3')
+    audio.play();
   }
 
   onPlayAgain(): void {

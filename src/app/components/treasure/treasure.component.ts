@@ -35,6 +35,9 @@ export class TreasureComponent implements OnInit, AfterViewInit {
       particleCount: 1000,
       spread: 360
     });
+
+    const audio = new Audio('assets/tada.mp3')
+    audio.play();
   }
 
   onNextTreasure(): void {
