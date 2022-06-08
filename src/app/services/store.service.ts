@@ -110,13 +110,13 @@ export class StoreService {
   }
 
   reset() {
+    this.localStorageService.remove('route');
+    this.localStorageService.remove('treasureIndex');
     this._selectedRoute$.next(null);
     this._treasureIndex$.next(0);
     this._showLanding$.next(true);
     this._showSummery$.next(false);
     this._showTreasure$.next(false);
-    this.localStorageService.remove('route');
-    this.localStorageService.remove('treasureIndex');
   }
 
   toggleLanding(): void {
