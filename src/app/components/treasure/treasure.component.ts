@@ -49,8 +49,8 @@ export class TreasureComponent implements OnInit, AfterViewInit {
   }
 
   onShowSummery(): void {
-    this.store.toggleSummery();
     this.store.toggleTreasure();
+    this.store.toggleSummery();
   }
 
 }
