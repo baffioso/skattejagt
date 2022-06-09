@@ -28,6 +28,9 @@ export class MapService {
       attributionControl: false
     })
 
+    this.map.touchZoomRotate.disableRotation();
+    this.map.dragRotate.disable();
+
     this.map.addControl(
       new GeolocateControl({
         positionOptions: {
