@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1654722651918,
+  "timestamp": 1654773134939,
   "index": "/skattejagt/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "/skattejagt/favicon.ico",
         "/skattejagt/index.html",
-        "/skattejagt/main.2f2f8f54a9936ad3.js",
+        "/skattejagt/main.29d588d261b3b341.js",
         "/skattejagt/manifest.webmanifest",
         "/skattejagt/polyfills.3c5b47ffb396d485.js",
         "/skattejagt/runtime.1e966b4813ff92d9.js",
@@ -74,8 +74,8 @@
     "/skattejagt/assets/treasure_33.png": "d01478419f9d2400c9d59140358b2414f9cee277",
     "/skattejagt/assets/treasures.ts": "55caa4d87fee1ee4e8f4bd17898e63ab6a057eb1",
     "/skattejagt/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/skattejagt/index.html": "ea255215eb74c7fe09ecec853ab21077f475a301",
-    "/skattejagt/main.2f2f8f54a9936ad3.js": "8ca3e241bfae9ece2d14e800bb119298fc292bfe",
+    "/skattejagt/index.html": "a054e6bf407d47adc48310a8790e7a6b5bc3503b",
+    "/skattejagt/main.29d588d261b3b341.js": "75b974aacbe4dbaaf32d5f4243d90853421bb8a8",
     "/skattejagt/manifest.webmanifest": "501560baac25549610ec25e874f55eff5674e18e",
     "/skattejagt/pirate.59ce3b4bca074094.gif": "1e9fa147d3c549f461e407cc0be9b60ec77ba37a",
     "/skattejagt/polyfills.3c5b47ffb396d485.js": "8ccd8f016647228d77f544803fc4c11fb43750a8",
