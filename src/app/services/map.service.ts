@@ -131,6 +131,6 @@ export class MapService {
       type: 'LineString',
       coordinates: [position, treasure]
     });
-    this.map.fitBounds(bounds as LngLatBoundsLike, { padding: 30 })
+    this.map.fitBounds(bounds as LngLatBoundsLike, { padding: 60 })
   }
 }
