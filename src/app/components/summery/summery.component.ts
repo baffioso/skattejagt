@@ -30,6 +30,8 @@ export class SummeryComponent implements AfterViewInit {
   }
 
   onPlayAgain(): void {
-    this.store.reset();
+    if(confirm('Er du sikker på du vil nulstille spillet?')) {
+      this.store.reset();
+    }
   }
 }

@@ -35,7 +35,7 @@ export class MapComponent implements AfterViewInit {
   }
 
   onReset() {
-    if(confirm('Er du sikker på du vil nulstille?')) {
+    if(confirm('Er du sikker på du vil nulstille spillet?')) {
       this.store.reset();
     }
   }
