@@ -23,8 +23,8 @@ export class MapService {
     this.map = new Map({
       container: 'map',
       style: 'https://api.maptiler.com/maps/6f058849-8a79-455e-ae2f-817a7ec72312/style.json?key=tiNMCb9CgsMttr9UGj47',
-      center: [12.5745, 55.6648],
-      zoom: 15,
+      center: [12.618371, 55.690323],
+      zoom: 14,
       attributionControl: false
     })
 
